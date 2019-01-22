@@ -27,7 +27,8 @@ public class GildedRoseTest {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 9, 42),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 4, 44),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 0, 47),};
+                new Item("Backstage passes to a TAFKAL80ETC concert", 0, 47),
+                new Item("Conjured", 3, 10),};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -41,6 +42,7 @@ public class GildedRoseTest {
         assertEquals("Backstage passes to a TAFKAL80ETC concert, 8, 44", app.items[7].toString());
         assertEquals("Backstage passes to a TAFKAL80ETC concert, 3, 47", app.items[8].toString());
         assertEquals("Backstage passes to a TAFKAL80ETC concert, -1, 0", app.items[9].toString());
+        assertEquals("Conjured, 2, 8", app.items[10].toString());
     }
 
 }

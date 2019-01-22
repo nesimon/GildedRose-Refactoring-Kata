@@ -18,6 +18,14 @@ class GildedRose {
                         && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                     if (items[i].quality > 0) {
                         items[i].quality = items[i].quality - 1;
+                        //conjured items decrease in quality twice as fast
+                        if(items[i].name.equals("Conjured"))
+                        {
+                            if (items[i].quality > 0)
+                            {
+                                items[i].quality = items[i].quality - 1;
+                            }
+                        }
                     }
                     //if cheese or tickets, increase value by 1
                 } else {
