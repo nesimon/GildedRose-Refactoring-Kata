@@ -13,45 +13,46 @@ class GildedRose {
         for (int i = 0; i < items.length; i++)
         {
             //SULFURAS IS IMMUNE TO THE PATHETIC ATTEMPTS OF TIME, HE IS NEVER CHANGING
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros"))
+            if (items[i].name.equals("Sulfuras, Hand of Ragnaros"))
             {
-                //if cheese
+                continue;
+            }
+            //if cheese
+            else if (items[i].name.equals("Aged Brie"))
+            {
+                updateBrie(items[i]);
+            }
+            //if backstage passes
+            else if(items[i].name.equals("Backstage passes to a TAFKAL80ETC concert"))
+            {
+                updateConcertTickets(items[i]);
+            }
+            //everything else (normal and conjured items)
+            else
+            {
+                updateOtherItems(items[i]);
+            }
+
+            //reduce days to sell by 1 to all but SULFURAS, HAND OF RAGNAROS!
+            items[i].sellIn -= 1;
+
+            //if items expired extra effects take place
+            if (items[i].sellIn < 0) {
+                //
                 if (items[i].name.equals("Aged Brie"))
                 {
+                    //cheese increases in value by 1 more since it is aged well
                     updateBrie(items[i]);
                 }
-                //if backstage passes
-                else if(items[i].name.equals("Backstage passes to a TAFKAL80ETC concert"))
+                else if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert"))
                 {
-                    updateConcertTickets(items[i]);
+                    //ticket value is 0 since it expired
+                    items[i].quality = 0;
                 }
-                //everything else (normal and conjured items)
                 else
                 {
+                    //reduce quality of items by 1 if expired
                     updateOtherItems(items[i]);
-                }
-
-                //reduce days to sell by 1 to all but SULFURAS, HAND OF RAGNAROS!
-                items[i].sellIn -= 1;
-
-                //if items expired extra effects take place
-                if (items[i].sellIn < 0) {
-                    //
-                    if (items[i].name.equals("Aged Brie"))
-                    {
-                        //cheese increases in value by 1 more since it is aged well
-                        updateBrie(items[i]);
-                    }
-                    else if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert"))
-                    {
-                        //ticket value is 0 since it expired
-                        items[i].quality = 0;
-                    }
-                    else
-                    {
-                        //reduce quality of items by 1 if expired
-                        updateOtherItems(items[i]);
-                    }
                 }
             }
         }
