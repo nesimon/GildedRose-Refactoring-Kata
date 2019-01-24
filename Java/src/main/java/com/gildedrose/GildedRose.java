@@ -60,7 +60,8 @@ class GildedRose {
     //
     public void updateBrie(Item items)
     {
-        if (items.quality < 50) {
+        if (items.quality < 50)
+        {
             items.quality += 1;
         }
     }
@@ -68,35 +69,32 @@ class GildedRose {
     public void updateConcertTickets(Item items)
     {
         //increase value of tickets by 1
-        if (items.quality < 50) {
+        if (items.quality < 50)
+        {
             items.quality += 1;
         }
 
         //if only 10 days to concert, increase value by 1 more
-        if (items.sellIn < 11) {
-            if (items.quality < 50) {
-                items.quality += 1;
-            }
+        if (items.sellIn < 11 && items.quality < 50)
+        {
+            items.quality += 1;
         }
         //if only 5 days to concert, increase value by 1 more if cost is less than 50
-        if (items.sellIn < 6) {
-            if (items.quality < 50) {
-                items.quality += 1;
-            }
+        if (items.sellIn < 6 && items.quality < 50)
+        {
+            items.quality += 1;
         }
     }
 
     public void updateOtherItems(Item items)
     {
-        if (items.quality > 0) {
+        if (items.quality > 0)
+        {
             items.quality -= 1;
             //conjured items decrease in quality twice as fast
-            if(items.name.equals("Conjured"))
+            if(items.name.equals("Conjured") && (items.quality > 0))
             {
-                if (items.quality > 0)
-                {
-                    items.quality -= 1;
-                }
+                items.quality -= 1;
             }
         }
     }
