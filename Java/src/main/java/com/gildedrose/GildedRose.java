@@ -7,54 +7,28 @@ class GildedRose {
         this.items = items;
     }
 
-    public void updateQuality() {
+    public void updateQuality()
+    {
         //iterates through items
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < items.length; i++)
+        {
             //SULFURAS IS IMMUNE TO THE PATHETIC ATTEMPTS OF TIME, HE IS NEVER CHANGING
             if (!items[i].name.equals("Sulfuras, Hand of Ragnaros"))
             {
                 //if cheese
                 if (items[i].name.equals("Aged Brie"))
                 {
-                    if (items[i].quality < 50) {
-                        items[i].quality += 1;
-                    }
+                    updateBrie(items[i]);
                 }
                 //if backstage passes
                 else if(items[i].name.equals("Backstage passes to a TAFKAL80ETC concert"))
                 {
-                    //increase value of tickets by 1
-                    if (items[i].quality < 50) {
-                        items[i].quality += 1;
-                    }
-
-                    //if only 10 days to concert, increase value by 1 more
-                    if (items[i].sellIn < 11) {
-                        if (items[i].quality < 50) {
-                            items[i].quality += 1;
-                        }
-                    }
-                    //if only 5 days to concert, increase value by 1 more if cost is less than 50
-                    if (items[i].sellIn < 6) {
-                        if (items[i].quality < 50) {
-                            items[i].quality += 1;
-                        }
-                    }
+                    updateConcertTickets(items[i]);
                 }
                 //everything else (normal and conjured items)
                 else
                 {
-                    if (items[i].quality > 0) {
-                        items[i].quality -= 1;
-                        //conjured items decrease in quality twice as fast
-                        if(items[i].name.equals("Conjured"))
-                        {
-                            if (items[i].quality > 0)
-                            {
-                                items[i].quality -= 1;
-                            }
-                        }
-                    }
+                    updateOtherItems(items[i]);
                 }
 
                 //reduce days to sell by 1 to all but SULFURAS, HAND OF RAGNAROS!
@@ -66,9 +40,7 @@ class GildedRose {
                     if (items[i].name.equals("Aged Brie"))
                     {
                         //cheese increases in value by 1 more since it is aged well
-                        if (items[i].quality < 50) {
-                            items[i].quality += 1;
-                        }
+                        updateBrie(items[i]);
                     }
                     else if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert"))
                     {
@@ -78,18 +50,52 @@ class GildedRose {
                     else
                     {
                         //reduce quality of items by 1 if expired
-                        if (items[i].quality > 0) {
-                            items[i].quality -= 1;
-                            //conjured items decrease in quality twice as fast
-                            if(items[i].name.equals("Conjured"))
-                            {
-                                if (items[i].quality > 0)
-                                {
-                                    items[i].quality -= 1;
-                                }
-                            }
-                        }
+                        updateOtherItems(items[i]);
                     }
+                }
+            }
+        }
+    }
+
+    //
+    public void updateBrie(Item items)
+    {
+        if (items.quality < 50) {
+            items.quality += 1;
+        }
+    }
+
+    public void updateConcertTickets(Item items)
+    {
+        //increase value of tickets by 1
+        if (items.quality < 50) {
+            items.quality += 1;
+        }
+
+        //if only 10 days to concert, increase value by 1 more
+        if (items.sellIn < 11) {
+            if (items.quality < 50) {
+                items.quality += 1;
+            }
+        }
+        //if only 5 days to concert, increase value by 1 more if cost is less than 50
+        if (items.sellIn < 6) {
+            if (items.quality < 50) {
+                items.quality += 1;
+            }
+        }
+    }
+
+    public void updateOtherItems(Item items)
+    {
+        if (items.quality > 0) {
+            items.quality -= 1;
+            //conjured items decrease in quality twice as fast
+            if(items.name.equals("Conjured"))
+            {
+                if (items.quality > 0)
+                {
+                    items.quality -= 1;
                 }
             }
         }
